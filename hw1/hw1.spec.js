@@ -9,7 +9,8 @@ test('testByCss', async ({ page }) => {
 })
 
 test('testByXpath', async ({ page }) => {
-    await page.locator('xpath=//input');
+    const name1 = await page.locator('xpath=//input');
+    await expect (name1).toBeEnabled();
 })
 
 
@@ -37,5 +38,10 @@ test('getNElement', async ({ page }) => {
     .getByRole('listitem').nth(2);
 })
 
+test('gewtByPlacehlder', async ({ page }) => {
+    const name2 = await page.getByPlaceholder('Поиск в Каталоге');
+    await expect(name2).toHaveValue('adgag');
+})
 
-
+// Task 2. Cоставить универсальный XPATH селектор, который позволял бы по имени сущности в таблице (Name, уникальный параметр) и названию столбца однозначно идентифицировать любую ячейку таблицы.
+//*[contains(text(),'SimpleDataset')]/../../td[count(preceding-sibling::td)+1 = count(ancestor::table/thead/tr/th[.='Updated']/preceding-sibling::th)+1]
